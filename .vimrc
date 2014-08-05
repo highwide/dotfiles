@@ -44,7 +44,15 @@ NeoBundle 'tpope/vim-endwise'
 " vim-indent-guides(インデントの深さを可視化)
 NeoBundle 'nathanaelkane/vim-indent-guides'
 
-" vimを立ち上げたときに、自動的にvim-indent-guidesを音にする
+" vim-indent-guidesの色設定
+let g:indent_guides_auto_colors=0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=110
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=140
+
+" vim-indent-guidesのサイズ設定
+let g:indent_guides_guide_size=1
+
+" vimを立ち上げたときに、自動的にvim-indent-guidesをonにする
 let g:indent_guides_enable_on_vim_startup = 1
 
 " AnsiEsc(ログなどANSIカラー情報が埋め込まれているファイルはカラー表示)
