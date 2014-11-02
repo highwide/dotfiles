@@ -13,6 +13,10 @@ export EDITOR=/usr/local/bin/vim
 export PAGER=/usr/local/bin/vimpager
 export MANPAGER=/usr/local/bin/vimpager
 
+# rbenvの環境変数
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
 # ----------------------------
 # zshのオプション
 # ----------------------------
@@ -48,6 +52,9 @@ setopt auto_pushd
 
 # ディレクトリ名を入力するだけでcdできるようにする
 setopt auto_cd
+
+# メタ文字が含まれていてもファイル名と思わせない
+setopt nonomatch
 
 # --------------------------------------
 # パス
