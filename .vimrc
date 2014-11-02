@@ -4,6 +4,12 @@ set title "編集中ファイル表示
 syntax on "コードの色分け
 set showmatch "括弧入力時の対応する括弧を表示
 set smartindent "オートインデント
+set paste "ペースト時のオートインデント無効
+
+"#####mac用#####
+set clipboard+=unnamed "ヤンクしたテキストがクリップボードに入る
+set nocompatible "viとの互換性を無効にする
+set backspace=indent,eol,start "行頭の空白、改行、挿入モード開始より前の文字を削除可能
 
 "#####ruby用#####
 set tabstop=2 "tabはスペース2つ
@@ -36,7 +42,7 @@ NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'slim-template/vim-slim'
 
 " autoclose(括弧の補完)
-NeoBundle 'Townk/vim-autoclose'
+" NeoBundle 'Townk/vim-autoclose'
 
 " endwise(Rubyでdoやifに対するendを補完)
 NeoBundle 'tpope/vim-endwise'
@@ -66,6 +72,7 @@ NeoBundle 'tpope/vim-endwise'
 " vim-markdown
 NeoBundle 'plasticboy/vim-markdown'
 au BufRead,BufNewFile *.md set filetype=markdown
+let g:vim_markdown_folding_disabled=1
 
 " previm
 NeoBundle 'kannokanno/previm'
