@@ -22,6 +22,7 @@ source $VIMRUNTIME/macros/matchit.vim "do/endを移動
 set ignorecase "検索時に大文字/小文字を区別しない
 set smartcase "検索ワードに大文字が入っていたら区別する
 set wrapscan	"検索時に最後まで行ったら最初に戻る
+set hlsearch  "ハイライト検索する
 
 "####Neobundle設定####
 " bundleで管理するディレクトリ指定
