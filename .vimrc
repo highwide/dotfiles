@@ -1,10 +1,11 @@
 "#####表示設定#####
 set number "行番号表示
 set title "編集中ファイル表示
-syntax on "コードの色分け
 set showmatch "括弧入力時の対応する括弧を表示
 set smartindent "オートインデント
 set paste "ペースト時のオートインデント無効
+set cursorline "カーソルの行を強調
+set cursorcolumn "カーソルの列を強調
 
 "#####mac用#####
 set clipboard+=unnamed "ヤンクしたテキストがクリップボードに入る
@@ -23,6 +24,11 @@ set ignorecase "検索時に大文字/小文字を区別しない
 set smartcase "検索ワードに大文字が入っていたら区別する
 set wrapscan	"検索時に最後まで行ったら最初に戻る
 set hlsearch  "ハイライト検索する
+
+"####色設定####
+let g:hybrid_use_iTerm_colors = 1
+colorscheme hybrid
+syntax on
 
 "####Neobundle設定####
 " bundleで管理するディレクトリ指定
