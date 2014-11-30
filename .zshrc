@@ -131,6 +131,9 @@ alias ll="ls -l"
 # bundle execを省略
 alias be="bundle exec"
 
+# rbenv execを省略
+alias re="rbenv exec"
+
 # tree
 alias tree="tree -NC" # N: 文字化け対策, C:色をつける
 
@@ -158,7 +161,7 @@ bindkey "^R" history-incrementalsearch-backward
 # ---------------------------------------------------
 
 # cdしたあとで、自動的にls + iTerm2のタブ名変更
-function chpwd() { ls ; echo -ne "\033]0;$(pwd | rev | awk -F \/ '{print "/"$1"/"$2}'| rev)\007" }
+function chpwd() { ll ; echo -ne "\033]0;$(pwd | rev | awk -F \/ '{print "/"$1"/"$2}'| rev)\007" }
 
 # iTerm2のタブ名を変更する
 function title {
