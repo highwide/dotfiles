@@ -154,7 +154,7 @@ function cdup() {
 zle -N cdup
 bindkey '^K' cdup
 
-bindkey "^R" history-incrementalsearch-backward
+bindkey "^R" history-incremental-search-backward
 
 # ---------------------------------------------------
 # その他
