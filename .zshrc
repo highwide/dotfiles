@@ -17,6 +17,9 @@ export MANPAGER=/usr/local/bin/vimpager
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
+# postgresの環境変数
+export PGDATA=/usr/local/var/postgres
+
 # ----------------------------
 # zshのオプション
 # ----------------------------
