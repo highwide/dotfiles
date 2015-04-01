@@ -5,6 +5,7 @@
 	user = highwide
 [alias]
 	co = checkout
+  s = status
 [push]
 	default = simple
 [core]
