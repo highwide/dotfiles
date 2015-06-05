@@ -7,25 +7,34 @@ export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
 # エディタ
-export EDITOR=/usr/local/bin/vim
+export EDITOR=$HOME/.linuxbrew/bin/vim
 
 # ページャ
-export PAGER=/usr/local/bin/vimpager
-export MANPAGER=/usr/local/bin/vimpager
-
-# rbenvの環境変数
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+export PAGER=/$HOME/.linuxbrew/bin/vimpager
+export MANPAGER=$HOME/.linuxbrew/bin/vimpager
 
 # postgresの環境変数
-export PGDATA=/usr/local/var/postgres
+# export PGDATA="/usr/local/var/postgres"
+
+# goの環境変数
+# export GOROOT="$HOME/go"
+# export PATH="$PATH:/usr/local/go/bin"
+
+# --------------------------------------
+# ヒストリー
+# --------------------------------------
+export HISTFILE=$HOME/.zsh-history
+export HISTSIZE=100000
+export SAVEHIST=100000
+setopt extended_history
+function history-all { history -E 1 }
 
 # ----------------------------
 # zshのオプション
 # ----------------------------
 
 ## 補完機能の強化
-autoload -U compinit
+autoload -U compinit promptinit
 compinit
 
 ## 入力しているコマンド名が間違っている場合にもしかして:を出す
@@ -150,7 +159,7 @@ alias re="rbenv exec"
 alias tree="tree -NC" # N: 文字化け対策, C:色をつける
 
 # gitでhubを可能にする
-function git(){hub "$@"}
+# function git(){hub "$@"}
 
 # ---------------------------------------------------
 # キーバインド
@@ -166,7 +175,22 @@ function cdup() {
 zle -N cdup
 bindkey '^K' cdup
 
-bindkey "^R" history-incremental-search-backward
+function peco-select-history() {
+  local tac
+  if which tac > /dev/null; then
+    tac="tac"
+  else 
+    tac="tail -r"
+  fi
+  BUFFER=$(history -n 1 | \
+    eval $tac | \
+    awk '!a[$0]++' | \
+    peco --query "$LBUFFER")
+  CURSOR=$#BUFFER
+  # zle clear-screen
+}
+zle -N peco-select-history
+bindkey "^R" peco-select-history
 
 # ---------------------------------------------------
 # その他

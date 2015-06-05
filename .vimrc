@@ -31,6 +31,9 @@ let g:hybrid_use_iTerm_colors = 1
 colorscheme hybrid
 syntax on
 
+"###keymap###
+nnoremap <silent><C-e> :NERDTreeToggle<CR>
+
 "####Neobundle設定####
 " bundleで管理するディレクトリ指定
 set runtimepath+=~/.vim/bundle/neobundle.vim/
@@ -97,11 +100,64 @@ let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': ['ruby'] }
 let g:syntastic_ruby_checkers = ['rubocop']
 
 
-" Unite.vim(vimのファイラ)
+" Unite.vim
 NeoBundle 'Shougo/unite.vim'
 " Unite.vim(Unite.vimで最近使ったファイルを表示
 NeoBundle 'Shougo/neomru.vim'
+" AG用vimproc
+NeoBundle 'Shougo/vimproc.vim', {
+\ 'build' : {
+\   'mac'   : 'make -f make_mac.mak',
+\   'linux' : 'make',
+\   'unix'  : 'gmake',
+\   },
+\ }
 
+" insert modeで開始
+" let g:unite_enable_start_insert=1
+
+" 
+let g:unite_source_history_yank_enable = 1
+let g:unite_source_file_mru_limit = 200
+
+" 大文字小文字を区別しない
+let g:unite_enable_ignore_case = 1
+let g:unite_enable_smart_case = 1
+
+" ヤンク一覧
+nnoremap <silent> ,uy :<C-u>Unite history/yank<CR>
+" バッファ一覧
+nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
+" ファイル一覧
+nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+" レジスタ一覧
+nnoremap <silent> ,ur :<C-u>Unite -buffer-name=register register<CR>
+" 最近使用したファイルとバッファ
+nnoremap <silent> ,uu :<C-u>Unite file_mru buffer<CR>
+
+" grep
+nnoremap <silent> ,g  :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
+" カーソル位置の単語をgrep
+nnoremap <silent> ,cg :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W>
+" grep結果の再呼出
+nnoremap <silent> ,r  :<C-u>UniteResume search-buffer<CR>
+
+" ウィンドウを分割して開く
+au FileType unite nnoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
+au FileType unite inoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
+" ウィンドウを縦に分割して開く
+au FileType unite nnoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
+au FileType unite inoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
+" ESCキーを2回押すと終了する
+au FileType unite nnoremap <silent> <buffer> <ESC><ESC> q
+au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>q
+
+" unite grepにagを使う
+if executable('ag')
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
+  let g:unite_source_grep_recursive_opts = ''
+endif
 
 call neobundle#end() "NeoBundleプラグインここまで
 
