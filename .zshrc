@@ -7,11 +7,14 @@ export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
 # エディタ
-export EDITOR=$HOME/.linuxbrew/bin/vim
+export EDITOR=/usr/local/bin/vim
+# export EDITOR=$HOME/.linuxbrew/bin/vim
 
 # ページャ
-export PAGER=/$HOME/.linuxbrew/bin/vimpager
-export MANPAGER=$HOME/.linuxbrew/bin/vimpager
+export PAGER=/usr/local/bin/vimpager
+export MANPAGER=/usr/local/bin/vimpager
+# export PAGER=/$HOME/.linuxbrew/bin/vimpager
+# export MANPAGER=$HOME/.linuxbrew/bin/vimpager
 
 # postgresの環境変数
 # export PGDATA="/usr/local/var/postgres"
