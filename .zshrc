@@ -71,27 +71,30 @@ setopt auto_cd
 setopt nonomatch
 
 # --------------------------------------
-# ヒストリー
-# --------------------------------------
-HISTFILE=$HOME/.zsh-history
-HISTSIZE=100000
-SAVEHIST=100000
-setopt extended_history
-function history-all { history -E 1 }
-
-# --------------------------------------
 # パス
 # --------------------------------------
 
 # 重複する要素を自動的に削除
 typeset -U path cdpath fpath manpath
 
+export PHP_ROOT="$HOME/.phpenv"
+
 path=(
-		$HOME/bin(N-/)
-		/usr/local/bin(N-/)
-		/usr/local/sbin(N-/)
-		$path
+    $HOME/bin(N-/)
+    /usr/local/bin(N-/)
+    /usr/local/sbin(N-/)
+    $HOME/.rbenv/bin(N-/)
+    $PHP_ROOT/bin(N-/)
+    /Applications/Mozart2.app/Contents/Resources/bin(N-/)
+    $path
 )
+
+# rbenvの環境変数
+eval "$(rbenv init -)"
+
+# phpenv
+eval "$(phpenv init -)"
+
 
 # -------------------------------------
 # プロンプト
@@ -113,16 +116,16 @@ zstyle ":vcs_info:bzr:*" use-simple true
 zstyle ":vcs_info:*" max-exports 6
 
 if is-at-least 4.3.10; then
-		zstyle ":vcs_info:git:*" check-for-changes true # commitしていないのをチェック
-		zstyle ":vcs_info:git:*" stagedstr "<S>"
-		zstyle ":vcs_info:git:*" unstagedstr "<U>"
-		zstyle ":vcs_info:git:*" formtas "(%b) %c%u"
-		zstyle ":vcs_info:git:*" actionformats "(%s)-[%b|%a] %c%u"
+    zstyle ":vcs_info:git:*" check-for-changes true # commitしていないのをチェック
+    zstyle ":vcs_info:git:*" stagedstr "<S>"
+    zstyle ":vcs_info:git:*" unstagedstr "<U>"
+    zstyle ":vcs_info:git:*" formtas "(%b) %c%u"
+    zstyle ":vcs_info:git:*" actionformats "(%s)-[%b|%a] %c%u"
 fi
 
 funciton vcs_prompt_info() {
-		LANG=en_US.UTF-8 vcs_info
-		[[ -n "$vcs_info_msg_0_" ]] && echo -n " %{$fg[yelow]%}$vcs_info_msg_0_%f"
+    LANG=en_US.UTF-8 vcs_info
+    [[ -n "$vcs_info_msg_0_" ]] && echo -n " %{$fg[yelow]%}$vcs_info_msg_0_%f"
 }
 # end VCS
 
@@ -170,9 +173,9 @@ alias tree="tree -NC" # N: 文字化け対策, C:色をつける
 bindkey -e
 
 function cdup() {
-		echo
-		cd ..
-		zle reset-prompt
+    echo
+    cd ..
+    zle reset-prompt
 }
 zle -N cdup
 bindkey '^K' cdup
