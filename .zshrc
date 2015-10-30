@@ -7,7 +7,7 @@ export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
 # エディタ
-export EDITOR=/usr/local/bin/vim
+export EDITOR=/Applications/MacVim.app/Contents/MacOS/mvim
 # export EDITOR=$HOME/.linuxbrew/bin/vim
 
 # ページャ
@@ -162,6 +162,10 @@ alias re="rbenv exec"
 
 # tree
 alias tree="tree -NC" # N: 文字化け対策, C:色をつける
+
+alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/mvim "$@"'
+alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/mvim "$@"'
+alias vit='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/mvim --remote-tab-silent "$@"'
 
 # gitでhubを可能にする
 # function git(){hub "$@"}
