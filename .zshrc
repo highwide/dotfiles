@@ -7,14 +7,7 @@ export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
 # エディタ
-export EDITOR=/Applications/MacVim.app/Contents/MacOS/mvim
-# export EDITOR=$HOME/.linuxbrew/bin/vim
-
-# ページャ
-export PAGER=/usr/local/bin/vimpager
-export MANPAGER=/usr/local/bin/vimpager
-# export PAGER=/$HOME/.linuxbrew/bin/vimpager
-# export MANPAGER=$HOME/.linuxbrew/bin/vimpager
+export EDITOR=/usr/local/bin/vim
 
 # postgresの環境変数
 # export PGDATA="/usr/local/var/postgres"
@@ -70,6 +63,9 @@ setopt auto_cd
 # メタ文字が含まれていてもファイル名と思わせない
 setopt nonomatch
 
+# Ctrl+S/Ctrl+Q によるフロー制御を使わないようにする
+setopt no_flow_control
+
 # --------------------------------------
 # パス
 # --------------------------------------
@@ -85,7 +81,6 @@ path=(
     /usr/local/sbin(N-/)
     $HOME/.rbenv/bin(N-/)
     $PHP_ROOT/bin(N-/)
-    /Applications/Mozart2.app/Contents/Resources/bin(N-/)
     $path
 )
 
@@ -93,7 +88,7 @@ path=(
 eval "$(rbenv init -)"
 
 # phpenv
-eval "$(phpenv init -)"
+# eval "$(phpenv init -)"
 
 
 # -------------------------------------
@@ -152,7 +147,7 @@ alias grep="grep --color -n -I --exclude='*.svn-*' --exclude='entries' --exclude
 alias ls="ls -G" # color for darwin
 alias l="ls -la"
 alias la="ls -la"
-alias ll="ls -l"
+alias ll="ls -la"
 
 # bundle execを省略
 alias be="bundle exec"
@@ -163,26 +158,14 @@ alias re="rbenv exec"
 # tree
 alias tree="tree -NC" # N: 文字化け対策, C:色をつける
 
-alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/mvim "$@"'
-alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/mvim "$@"'
-alias vit='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/mvim --remote-tab-silent "$@"'
-
 # gitでhubを可能にする
-# function git(){hub "$@"}
+function git(){hub "$@"}
 
 # ---------------------------------------------------
 # キーバインド
 # ---------------------------------------------------
 
 bindkey -e
-
-function cdup() {
-    echo
-    cd ..
-    zle reset-prompt
-}
-zle -N cdup
-bindkey '^K' cdup
 
 function peco-select-history() {
   local tac
@@ -210,7 +193,7 @@ function peco-src() {
   zle clear-screen
 }
 zle -N peco-src
-bindkey '^]' peco-src
+bindkey '^s' peco-src
 
 # ---------------------------------------------------
 # その他
@@ -223,7 +206,3 @@ function chpwd() { ll ; echo -ne "\033]0;$(pwd | rev | awk -F \/ '{print "/"$1"/
 function title {
     echo -ne "\033]0;"$*"\007"
 }
-
-
-# added by travis gem
-[ -f /Users/highwide/.travis/travis.sh ] && source /Users/highwide/.travis/travis.sh
