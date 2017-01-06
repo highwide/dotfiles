@@ -1,8 +1,10 @@
 [alias]
+  c = commit
   co = checkout
   s = status
   p = push
   pl = pull --rebase
+  l = log --graph --date=iso --pretty='[%ad]%C(auto) %h%d %Cgreen%an%Creset : %s'
 [push]
   default = simple
 [core]
