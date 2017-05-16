@@ -195,6 +195,17 @@ function peco-src() {
 zle -N peco-src
 bindkey '^s' peco-src
 
+function peco-co-branch() {
+  local selected_branch=$(git branch | peco --query "$LBUFFER")
+  if [ -n "$selected_branch" ]; then
+    BUFFER="git checkout ${selected_branch}"
+    zle accept-line
+  fi
+  zle clear-screen
+}
+zle -N peco-co-branch
+bindkey '^g' peco-co-branch
+
 # ---------------------------------------------------
 # その他
 # ---------------------------------------------------
