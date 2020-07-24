@@ -3,6 +3,7 @@
   co = checkout
   s = status
   p = push
+  poh = push origin HEAD
   pl = pull --rebase
   l = log --graph --date=iso --pretty='[%ad]%C(auto) %h%d %Cgreen%an%Creset : %s'
 [push]
@@ -12,3 +13,6 @@
   editor = vim
 [ghq]
   root = ~/src
+[user]
+	name = highwide
+	email = hochweit728@gmail.com

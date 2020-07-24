@@ -81,6 +81,7 @@ path=(
     /usr/local/sbin(N-/)
     $HOME/.rbenv/bin(N-/)
     $PHP_ROOT/bin(N-/)
+    $HOME/.nodebrew/current/bin(N-/)
     $path
 )
 
@@ -158,6 +159,9 @@ alias re="rbenv exec"
 # tree
 alias tree="tree -NC" # N: 文字化け対策, C:色をつける
 
+# localhost:3000
+alias ol3="open http://localhost:3000"
+
 # gitでhubを可能にする
 function git(){hub "$@"}
 
@@ -217,3 +221,6 @@ function chpwd() { ll ; echo -ne "\033]0;$(pwd | rev | awk -F \/ '{print "/"$1"/
 function title {
     echo -ne "\033]0;"$*"\007"
 }
+
+# added by travis gem
+[ -f /Users/highwide/.travis/travis.sh ] && source /Users/highwide/.travis/travis.sh
