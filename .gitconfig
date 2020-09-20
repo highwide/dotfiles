@@ -1,18 +1,29 @@
 [alias]
   c = commit
-  co = checkout
+  sw = switch
   s = status
   p = push
-  poh = push origin HEAD
   pl = pull --rebase
   l = log --graph --date=iso --pretty='[%ad]%C(auto) %h%d %Cgreen%an%Creset : %s'
+  poh = push origin HEAD
+  rrb = !sh -c 'git push origin :$(git branch --show-current)' # Remove Remote Branch
+  tmp = commit -am "tmp"
 [push]
   default = simple
-[core]
-  excludesfile = ~/.gitignore_global
-  editor = vim
 [ghq]
   root = ~/src
+[core]
+  editor = vim
+  excludesfile = ~/.gitignore_global
+  quotepath = false
 [user]
-	name = highwide
-	email = hochweit728@gmail.com
+  name = highwide
+  email = hochweit728@gmail.com
+
+[secrets]
+  providers = git secrets --aws-provider
+  patterns = (A3T[A-Z0-9]|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)[A-Z0-9]{16}
+  patterns = (\"|')?(AWS|aws|Aws)?_?(SECRET|secret|Secret)?_?(ACCESS|access|Access)?_?(KEY|key|Key)(\"|')?\\s*(:|=>|=)\\s*(\"|')?[A-Za-z0-9/\\+=]{40}(\"|')?
+  patterns = (\"|')?(AWS|aws|Aws)?_?(ACCOUNT|account|Account)_?(ID|id|Id)?(\"|')?\\s*(:|=>|=)\\s*(\"|')?[0-9]{4}\\-?[0-9]{4}\\-?[0-9]{4}(\"|')?
+  allowed = AKIAIOSFODNN7EXAMPLE
+  allowed = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
